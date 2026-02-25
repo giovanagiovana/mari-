@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Para a Mari ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+        body {
+            background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        h1 {
+            color: white;
+            font-size: 5rem;
+            text-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+            z-index: 10;
+            text-align: center;
+        }
+
+        /* Estilo das Rosas Gigantes */
+        .rosa {
+            position: absolute;
+            font-size: 100px; /* Rosa Gigante */
+            user-select: none;
+            cursor: default;
+            z-index: 5;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+            animation: pularERodar 4s infinite ease-in-out;
+        }
+
+        @keyframes pularERodar {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            50% {
+                transform: translateY(-100px) rotate(20deg) scale(1.2);
+            }
+        }
+
+        .marca-dagua {
+            position: fixed;
+            bottom: 15px;
+            right: 20px;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Para a Mari! 🌹</h1>
+
+    <div class="marca-dagua">Criado por Giovana Top Programation ✨</div>
+
+    <script>
+        const emojisRosas = ['🌹', '🌷', '🌸', '🌺'];
+
+        function criarRosa() {
+            const rosa = document.createElement('div');
+            rosa.className = 'rosa';
+            
+            // Escolhe uma rosa aleatória
+            rosa.innerText = emojisRosas[Math.floor(Math.random() * emojisRosas.length)];
+            
+            // Posição aleatória na tela
+            rosa.style.left = Math.random() * 90 + 'vw';
+            rosa.style.top = Math.random() * 80 + 'vh';
+            
+            // Tamanho aleatório (entre 80px e 150px)
+            const tamanho = Math.random() * 70 + 80;
+            rosa.style.fontSize = tamanho + 'px';
+            
+            // Tempo de animação diferente para cada uma não pular igual
+            rosa.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            rosa.style.animationDelay = (Math.random() * 2) + 's';
+
+            document.body.appendChild(rosa);
+        }
+
+        // Cria 15 rosas gigantes na tela
+        for (let i = 0; i < 15; i++) {
+            criarRosa();
+        }
+
+        // Faz uma rosa nova "pular" na tela a cada 2 segundos
+        setInterval(() => {
+            const rosasNaTela = document.querySelectorAll('.rosa');
+            if(rosasNaTela.length < 25) { // Limite para não travar o celular
+                criarRosa();
+            }
+        }, 2000);
+    </script>
+</body>
+</html>
