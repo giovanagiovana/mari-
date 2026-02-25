@@ -2,9 +2,9 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>OIIIII MARIIIIIIIIII❤️</title>
+    <title>Um Convite Especial ❤️</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;700&display=swap');
 
         body {
             background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
@@ -12,95 +12,131 @@
             margin: 0;
             overflow: hidden;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            font-family: 'Dancing Script', cursive;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Container do Convite */
+        .painel {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            text-align: center;
+            z-index: 20;
+            max-width: 80%;
         }
 
         h1 {
-            color: white;
-            font-size: 5rem;
-            text-shadow: 4px 4px 10px rgba(0,0,0,0.2);
-            z-index: 10;
-            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            color: #db2777;
+            font-size: 3rem;
+            margin-bottom: 20px;
         }
 
-        /* Estilo das Rosas Gigantes */
+        .botoes {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            position: relative;
+        }
+
+        button {
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #btnSim {
+            background: #ff1493;
+            color: white;
+            box-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
+        }
+
+        #btnSim:hover {
+            transform: scale(1.1);
+            background: #ff69b4;
+        }
+
+        #btnNao {
+            background: #999;
+            color: white;
+            position: relative;
+        }
+
+        /* Rosas Gigantes */
         .rosa {
             position: absolute;
-            font-size: 100px; /* Rosa Gigante */
-            user-select: none;
-            cursor: default;
+            font-size: 100px;
             z-index: 5;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
             animation: pularERodar 4s infinite ease-in-out;
+            pointer-events: none;
         }
 
         @keyframes pularERodar {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg) scale(1);
-            }
-            50% {
-                transform: translateY(-100px) rotate(20deg) scale(1.2);
-            }
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-100px) rotate(20deg) scale(1.2); }
         }
 
         .marca-dagua {
             position: fixed;
-            bottom: 15px;
-            right: 20px;
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.7);
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
             z-index: 100;
         }
     </style>
 </head>
 <body>
 
-    <h1>Para a Mari! 🌹</h1>
+    <div class="painel">
+        <h1>Mari, aceita sair comigo? 🌹</h1>
+        <div class="botoes">
+            <button id="btnSim" onclick="aceitou()">SIM!</button>
+            <button id="btnNao" onmouseover="fugir()" onclick="fugir()">NÃO</button>
+        </div>
+    </div>
 
     <div class="marca-dagua">Criado por Giovana Top Programation ✨</div>
 
     <script>
-        const emojisRosas = ['🌹', '🌷', '🌸', '🌺'];
-
-        function criarRosa() {
+        // Criar Rosas Gigantes
+        const emojis = ['🌹', '🌷', '🌸'];
+        for (let i = 0; i < 12; i++) {
             const rosa = document.createElement('div');
             rosa.className = 'rosa';
-            
-            // Escolhe uma rosa aleatória
-            rosa.innerText = emojisRosas[Math.floor(Math.random() * emojisRosas.length)];
-            
-            // Posição aleatória na tela
+            rosa.innerText = emojis[Math.floor(Math.random() * emojis.length)];
             rosa.style.left = Math.random() * 90 + 'vw';
             rosa.style.top = Math.random() * 80 + 'vh';
-            
-            // Tamanho aleatório (entre 80px e 150px)
-            const tamanho = Math.random() * 70 + 80;
-            rosa.style.fontSize = tamanho + 'px';
-            
-            // Tempo de animação diferente para cada uma não pular igual
-            rosa.style.animationDuration = (Math.random() * 2 + 2) + 's';
             rosa.style.animationDelay = (Math.random() * 2) + 's';
-
             document.body.appendChild(rosa);
         }
 
-        // Cria 15 rosas gigantes na tela
-        for (let i = 0; i < 15; i++) {
-            criarRosa();
+        // Função para o botão NÃO fugir
+        function fugir() {
+            const btnNao = document.getElementById('btnNao');
+            const x = Math.random() * (window.innerWidth - btnNao.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btnNao.offsetHeight);
+            
+            btnNao.style.position = "absolute";
+            btnNao.style.left = x + "px";
+            btnNao.style.top = y + "px";
         }
 
-        // Faz uma rosa nova "pular" na tela a cada 2 segundos
-        setInterval(() => {
-            const rosasNaTela = document.querySelectorAll('.rosa');
-            if(rosasNaTela.length < 25) { // Limite para não travar o celular
-                criarRosa();
-            }
-        }, 2000);
+        // Função quando clicar em SIM
+        function aceitou() {
+            alert("EBA! Mal posso esperar! ❤️✨");
+            // Se quiser que vá para o WhatsApp após o OK, desmarque a linha abaixo:
+            // window.location.href = "https://wa.me/SEUNUMERO";
+        }
     </script>
 </body>
-
 </html>
-
