@@ -2,37 +2,43 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Um Convite Especial ❤️</title>
+    <title>Para Minha Amiga Especial ❤️</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;700&display=swap');
+        /* Importando fontes modernas */
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600;700&display=swap');
 
         body {
-            background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+            background: linear-gradient(to bottom right, #f8cdda, #e9a3b9); 
             height: 100vh;
             margin: 0;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
+            /* NOVA FONTE PADRÃO */
             font-family: 'Poppins', sans-serif;
+            color: #4a0404;
+            position: relative;
         }
 
-        /* Container do Convite */
-        .painel {
+        .declaracao-painel {
             background: rgba(255, 255, 255, 0.9);
             padding: 40px;
             border-radius: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             text-align: center;
             z-index: 20;
-            max-width: 80%;
+            max-width: 90%;
+            position: relative;
         }
 
         h1 {
+            /* FONTE CURSIVA ELEGANTE */
             font-family: 'Dancing Script', cursive;
             color: #db2777;
             font-size: 3rem;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            line-height: 1.2;
         }
 
         .botoes {
@@ -46,61 +52,87 @@
         button {
             padding: 15px 35px;
             font-size: 1.2rem;
-            font-weight: bold;
+            /* TEXTO EM NEGRITO */
+            font-weight: 600;
             border-radius: 50px;
             border: none;
             cursor: pointer;
             transition: 0.3s;
+            /* FONTE MODERNA */
+            font-family: 'Poppins', sans-serif;
         }
 
         #btnSim {
-            background: #ff1493;
+            background: #ff69b4;
             color: white;
-            box-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
         }
 
         #btnSim:hover {
             transform: scale(1.1);
-            background: #ff69b4;
+            background: #ff8cbf;
         }
 
         #btnNao {
-            background: #999;
-            color: white;
+            background: #ccc;
+            color: #555;
             position: relative;
         }
 
-        /* Rosas Gigantes */
-        .rosa {
+        .item-fundo {
             position: absolute;
-            font-size: 100px;
+            font-size: 60px;
             z-index: 5;
-            animation: pularERodar 4s infinite ease-in-out;
+            animation: flutuarGirando 6s infinite ease-in-out;
+            opacity: 0.8;
             pointer-events: none;
         }
 
-        @keyframes pularERodar {
-            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
-            50% { transform: translateY(-100px) rotate(20deg) scale(1.2); }
+        @keyframes flutuarGirando {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            50% { transform: translateY(-30px) rotate(30deg); opacity: 1; }
+        }
+
+        .explosao-item {
+            position: fixed;
+            font-size: 50px;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 1;
+            transform: scale(1);
+            animation: pularEDesaparecer 2.5s ease-out forwards;
+        }
+
+        @keyframes pularEDesaparecer {
+            0% {
+                transform: translate(0, 0) scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y)) scale(1.5) rotate(var(--r));
+                opacity: 0;
+            }
         }
 
         .marca-dagua {
             position: fixed;
-            bottom: 10px;
+            bottom: 15px;
             width: 100%;
             text-align: center;
             font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.8);
-            z-index: 100;
+            /* FONTE MODERNA */
+            font-family: 'Poppins', sans-serif;
+            color: rgba(74, 4, 4, 0.4);
+            z-index: 200;
         }
     </style>
 </head>
 <body>
 
-    <div class="painel">
-        <h1>Mari, aceita sair comigo? 🌹</h1>
+    <div class="declaracao-painel">
+        <h1>le sei que samos amiga <br>mas teremos que ficar! 😉❤️</h1>
         <div class="botoes">
-            <button id="btnSim" onclick="aceitou()">SIM!</button>
+            <button id="btnSim" onclick="confirmar()">CLARO QUE SIM!</button>
             <button id="btnNao" onmouseover="fugir()" onclick="fugir()">NÃO</button>
         </div>
     </div>
@@ -108,36 +140,57 @@
     <div class="marca-dagua">Criado por Giovana Top Programation ✨</div>
 
     <script>
-        // Criar Rosas Gigantes
-        const emojis = ['🌹', '🌷', '🌸'];
-        for (let i = 0; i < 12; i++) {
-            const rosa = document.createElement('div');
-            rosa.className = 'rosa';
-            rosa.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-            rosa.style.left = Math.random() * 90 + 'vw';
-            rosa.style.top = Math.random() * 80 + 'vh';
-            rosa.style.animationDelay = (Math.random() * 2) + 's';
-            document.body.appendChild(rosa);
+        const emojisFundo = ['🌹', '💖', '😽', '😻', '🌸', '❤️'];
+        for (let i = 0; i < 20; i++) {
+            const item = document.createElement('div');
+            item.className = 'item-fundo';
+            item.innerText = emojisFundo[Math.floor(Math.random() * emojisFundo.length)];
+            item.style.left = Math.random() * 100 + 'vw';
+            item.style.top = Math.random() * 100 + 'vh';
+            item.style.fontSize = (Math.random() * 30 + 50) + 'px';
+            item.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            item.style.animationDelay = (Math.random() * 3) + 's';
+            document.body.appendChild(item);
         }
 
-        // Função para o botão NÃO fugir
         function fugir() {
-            const btnNao = document.getElementById('btnNao');
-            const x = Math.random() * (window.innerWidth - btnNao.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btnNao.offsetHeight);
-            
-            btnNao.style.position = "absolute";
-            btnNao.style.left = x + "px";
-            btnNao.style.top = y + "px";
+            const btn = document.getElementById('btnNao');
+            const newX = Math.random() * (window.innerWidth * 0.8);
+            const newY = Math.random() * (window.innerHeight * 0.8);
+            btn.style.position = 'fixed';
+            btn.style.left = newX + 'px';
+            btn.style.top = newY + 'px';
         }
 
-        // Função quando clicar em SIM
-        function aceitou() {
-            alert("tira ropa❤️✨");
-            // Se quiser que vá para o WhatsApp após o OK, desmarque a linha abaixo:
-            // window.location.href = "https://wa.me/SEUNUMERO";
+        function criarExplosao() {
+            const emojisExplosao = ['❤️', '💖', '🌹', '😽', '😻', '✨', '💘', '🌷', '💓'];
+            for (let i = 0; i < 70; i++) {
+                const item = document.createElement('div');
+                item.className = 'explosao-item';
+                item.innerText = emojisExplosao[Math.floor(Math.random() * emojisExplosao.length)];
+                
+                item.style.left = (window.innerWidth / 2) + 'px';
+                item.style.top = (window.innerHeight / 2) + 'px';
+
+                const forçaPositivaNegativaX = Math.random() < 0.5 ? -1 : 1;
+                const forçaPositivaNegativaY = Math.random() < 0.5 ? -1 : 1;
+                item.style.setProperty('--x', (Math.random() * 600 * forçaPositivaNegativaX) + 'px');
+                item.style.setProperty('--y', (Math.random() * 600 * forçaPositivaNegativaY) + 'px');
+                item.style.setProperty('--r', (Math.random() * 720 - 360) + 'deg'); 
+
+                item.style.fontSize = (Math.random() * 40 + 40) + 'px';
+
+                document.body.appendChild(item);
+                setTimeout(() => item.remove(), 2500);
+            }
+        }
+
+        function confirmar() {
+            criarExplosao();
+            setTimeout(() => {
+                alert(repasse para 10 amigos e veja a reacao deles");
+            }, 1000);
         }
     </script>
 </body>
 </html>
-
